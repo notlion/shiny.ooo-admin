@@ -1,0 +1,24 @@
+#!/bin/bash
+
+if [ $# -lt 2 ]; then
+  echo "Usage: $0 <username> <key>"
+  exit
+fi
+
+user=$1
+userkey=$2
+
+nginxwww="/usr/share/nginx/www"
+userhome="/home/$user"
+userwww="$userhome/www"
+
+useradd -s /bin/bash -p `openssl passwd changeme` ${user}
+mkdir -p ${userwww}
+
+/admin/set_user_key "$user" "$userkey"
+
+touch "$userwww/index.html"
+chown -R ${user}:${user} "$userhome"
+ln -sT "$userwww" "$nginxwww/~$user"
+
+/admin/users_json > "$nginxwww/users.json"

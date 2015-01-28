@@ -1,0 +1,9 @@
+#!/usr/bin/env python
+
+import glob
+import json
+
+user_dirs = glob.glob('/usr/share/nginx/www/~*')
+users = map(lambda d: d[d.rindex('/') + 1:], user_dirs)
+
+print(json.dumps(users))

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [ $# -lt 1 ]; then
+  echo "Usage: $0 <username>"
+  exit
+fi
+
+user=$1
+
+nginxwww="/usr/share/nginx/www"
+userhome="/home/$user"
+userwww="$userhome/www"
+
+userdel -r ${user} && \
+  rm "$nginxwww/~$user"
+
+/admin/users_json > "$nginxwww/users.json"

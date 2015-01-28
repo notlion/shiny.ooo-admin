@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ $# -lt 2 ]; then
+  echo "Usage: $0 <username> <key>"
+  exit
+fi
+
+user=$1
+userkey=$2
+userssh="/home/$user/.ssh"
+
+ssh-keygen -lf /dev/stdin <<< ${userkey} || (echo "Bad key" && exit)
+
+mkdir -p ${userssh}
+echo "$userkey" > ${userssh}/authorized_keys
