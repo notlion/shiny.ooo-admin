@@ -1,0 +1,5 @@
+#!/bin/bash
+
+nginxwww="/usr/share/nginx/www"
+
+/admin/users_json > "$nginxwww/users.json"

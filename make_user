@@ -21,4 +21,4 @@ touch "$userwww/index.html"
 chown -R ${user}:${user} "$userhome"
 ln -sT "$userwww" "$nginxwww/~$user"
 
-/admin/users_json > "$nginxwww/users.json"
+/admin/update_users_json
